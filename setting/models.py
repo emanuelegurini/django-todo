@@ -1,4 +1,5 @@
 from django.db import models
+from user.models import User
 
 class Setting(models.Model): 
 
@@ -21,6 +22,13 @@ class Setting(models.Model):
 		max_length=20,
 		choices=AccountType.choices, 
 		default=AccountType.FREE 
+	)
+	
+	user = models.ForeignKey(
+		User,
+		on_delete=models.SET_NULL,
+		blank=True,
+		null=True
 	)
 
 	class Meta:
