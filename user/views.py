@@ -32,7 +32,7 @@ def users_list(request):
 
 	return JsonResponse(data, safe=False)
 
-@csrf_exempt
+@csrf_exempt #TODO: eliminare (utilizzo a fini didattici)
 def add_user(request):
 	if request.method == "POST":
 		try:

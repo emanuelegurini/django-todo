@@ -1,3 +1,8 @@
+### TODO:
+- add DRF (DJago Rest Framework)
+	- add DTO / Mapper (serializer)
+	- add annotation (get and post request) to the view
+
 - create a new entity
 ```bash
 python manage.py startapp <entity name>
