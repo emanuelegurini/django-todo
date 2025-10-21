@@ -1,5 +1,7 @@
 from django.http import JsonResponse
+import json
 from .models import User
+from django.views.decorators.csrf import csrf_exempt
 
 """
 In Django la view ha lo stesso ruolo del controller nel pattern MVC (in pattern usiamo MTV).
@@ -29,3 +31,31 @@ def users_list(request):
 	"""
 
 	return JsonResponse(data, safe=False)
+
+@csrf_exempt
+def add_user(request):
+	if request.method == "POST":
+		try:
+			data = json.loads(request.body)
+
+			new_user = User.objects.create(
+				first_name = data.get('first_name'),
+				last_name = data.get('last_name'),
+				email = data.get('email')
+			)
+
+			response_data = {
+				'id': new_user.id, 
+				'first_name': new_user.first_name,
+				'last_name': new_user.last_name,
+				'email': new_user.email
+			}
+
+			return JsonResponse(response_data, status=201)
+	
+
+		except (json.JSONDecodeError, KeyError) as e:
+			return JsonResponse({'error': 'Invalid data provided'}, status=400)
+
+	else:
+		return JsonResponse({'error': 'Only POST method is allowed'}, status=405)
