@@ -1,5 +1,8 @@
 from django.http import JsonResponse
-import json
+from rest_framework.decorators import api_view
+from rest_framework.response import Response 
+from rest_framework import status
+from .serializers import UserSerializer
 from .models import User
 from django.views.decorators.csrf import csrf_exempt
 
@@ -10,12 +13,11 @@ Quindi la view e una funzione che riceve le richieste e restituisce le risposte.
 https://www.programmareinpython.it/blog/che-cosa-rende-django-speciale-miglior-web-framewo/
 """
 
+@api_view(['GET'])
 def users_list(request):
 	users = User.objects.all()
- 	# Serialize the QuerySet into a list of dictionaries using .values
 
-	print(f'users: ${users}')
-	data = list(users.values('id', 'first_name', 'last_name', 'email'))	
+	serializer = UserSerializer(users, many=True)
 
 	"""
 	Il parametro 'safe=False' e necessario per l'invio di una lista:
@@ -30,32 +32,17 @@ def users_list(request):
 			- persona = {'nome': 'Ada', 'cognome': 'Neri', 'eta': 25}
 	"""
 
-	return JsonResponse(data, safe=False)
+	return Response(serializer.data)
 
-@csrf_exempt #TODO: eliminare (utilizzo a fini didattici)
+@api_view(['POST'])
 def add_user(request):
-	if request.method == "POST":
-		try:
-			data = json.loads(request.body)
 
-			new_user = User.objects.create(
-				first_name = data.get('first_name'),
-				last_name = data.get('last_name'),
-				email = data.get('email')
-			)
+	serializer = UserSerializer(data=request.data)
 
-			response_data = {
-				'id': new_user.id, 
-				'first_name': new_user.first_name,
-				'last_name': new_user.last_name,
-				'email': new_user.email
-			}
+	if serializer.is_valid(): 
+		serializer.save()
+		return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-			return JsonResponse(response_data, status=201)
+	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	
 
-		except (json.JSONDecodeError, KeyError) as e:
-			return JsonResponse({'error': 'Invalid data provided'}, status=400)
-
-	else:
-		return JsonResponse({'error': 'Only POST method is allowed'}, status=405)

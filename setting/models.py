@@ -5,7 +5,7 @@ class Setting(models.Model):
 
 	class Theme(models.TextChoices):
 		DARK = "DARK", "Dark"
-		LIGHT = "LIGHT", "Ligth"
+		LIGHT = "LIGHT", "Light"
 
 	class AccountType(models.TextChoices):
 		FREE = "FREE", "Free"
@@ -24,7 +24,7 @@ class Setting(models.Model):
 		default=AccountType.FREE 
 	)
 	
-	user = models.ForeignKey(
+	user = models.OneToOneField(
 		User,
 		on_delete=models.SET_NULL,
 		blank=True,

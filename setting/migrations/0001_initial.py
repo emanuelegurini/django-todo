@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='Setting',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('theme', models.CharField(choices=[('DARK', 'Dark'), ('LIGHT', 'Ligth')], default='LIGHT', max_length=20)),
+                ('theme', models.CharField(choices=[('DARK', 'Dark'), ('LIGHT', '')], default='LIGHT', max_length=20)),
                 ('account_type', models.CharField(choices=[('FREE', 'Free'), ('PRO', 'PRO'), ('MAX', 'MAX')], default='FREE', max_length=20)),
             ],
             options={
