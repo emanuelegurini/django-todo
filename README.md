@@ -35,5 +35,16 @@ sqllite3 db.sqlite3 # db is the db name
 
 ```
 
+- Format code
+```bash
+ruff format .
+
+```
+
+- Check imports
+```bash
+ruff check .
+
+```
 
 

@@ -5,21 +5,29 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('setting', '0002_setting_user'),
-        ('user', '0001_initial'),
+        ("setting", "0002_setting_user"),
+        ("user", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='setting',
-            name='theme',
-            field=models.CharField(choices=[('DARK', 'Dark'), ('LIGHT', 'Light')], default='LIGHT', max_length=20),
+            model_name="setting",
+            name="theme",
+            field=models.CharField(
+                choices=[("DARK", "Dark"), ("LIGHT", "Light")],
+                default="LIGHT",
+                max_length=20,
+            ),
         ),
         migrations.AlterField(
-            model_name='setting',
-            name='user',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='user.user'),
+            model_name="setting",
+            name="user",
+            field=models.OneToOneField(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="user.user",
+            ),
         ),
     ]
