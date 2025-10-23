@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import UserSerializer
-from .models import User
+from .serializers import ProfileSerializer
+from .models import Profile
 
 """
 In Django la view ha lo stesso ruolo del controller nel pattern MVC (in pattern usiamo MTV).
@@ -13,17 +13,17 @@ https://www.programmareinpython.it/blog/che-cosa-rende-django-speciale-miglior-w
 
 
 @api_view(["GET"])
-def users_list(request):
-    users = User.objects.all()
+def profiles_list(request):
+    users = Profile.objects.all()
 
-    serializer = UserSerializer(users, many=True)
+    serializer = ProfileSerializer(users, many=True)
 
     return Response(serializer.data)
 
 
 @api_view(["POST"])
-def add_user(request):
-    serializer = UserSerializer(data=request.data)
+def add_profile(request):
+    serializer = ProfileSerializer(data=request.data)
 
     if serializer.is_valid():
         serializer.save()

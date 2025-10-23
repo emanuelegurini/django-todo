@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import User
+from django.contrib.auth.models import User as AuthUser
 
 
 class Setting(models.Model):
@@ -18,10 +18,10 @@ class Setting(models.Model):
         max_length=20, choices=AccountType.choices, default=AccountType.FREE
     )
 
-    user = models.OneToOneField(User, on_delete=models.SET_NULL, blank=True, null=True)
+    auth_user = models.OneToOneField(AuthUser, on_delete=models.SET_NULL, blank=True, null=True)
 
     class Meta:
         db_table = "settings"
 
     def __str__(self):
-        f"Settings for {self.user.first_name if self.user else 'No User'}"
+        return f"Settings for {self.auth_user.first_name if self.auth_user else 'No User'}"
