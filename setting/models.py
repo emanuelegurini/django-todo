@@ -22,3 +22,6 @@ class Setting(models.Model):
 
     class Meta:
         db_table = "settings"
+
+    def __str__(self):
+        f"Settings for {self.user.first_name if self.user else 'No User'}"

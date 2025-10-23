@@ -1,7 +1,6 @@
 ### TODO:
-- add DRF (DJago Rest Framework)
-	- add DTO / Mapper (serializer)
-	- add annotation (get and post request) to the view
+ - Models Not Registered in Admin
+ - improve error handling
 
 - create a new entity
 ```bash
@@ -18,6 +17,12 @@ python manage.py makemigrations
 - apply migrations 
 ```bash
 python manage.py migrate
+
+```
+
+- run server
+```bash
+python manage.py runserver  
 
 ```
 

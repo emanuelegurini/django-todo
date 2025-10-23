@@ -18,19 +18,6 @@ def users_list(request):
 
     serializer = UserSerializer(users, many=True)
 
-    """
-	Il parametro 'safe=False' e necessario per l'invio di una lista:
-		- di default JsonResponse accetta solo dizionari (safe=True), come meccanismo di sicurezza per evitare di splorre dati non strutturati o sensibili in modo involontario 
-		- Se passi un oggetto che non è un dizionario con safe=True, Django genera un errore
-
-	Differenze tra lista e dizionario:
-		- lista:
-			- nomi = ['Ada', 'Neri', 2]
-
-		- dizionario: 
-			- persona = {'nome': 'Ada', 'cognome': 'Neri', 'eta': 25}
-	"""
-
     return Response(serializer.data)
 
 
