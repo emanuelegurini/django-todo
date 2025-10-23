@@ -1,6 +1,8 @@
+Questo progetto ha scopo puramente didattico.
+
 ### TODO:
-	- add auth (JWT)
- 	- improve error handling
+- add auth (JWT)
+- improve error handling
 
 - create a new entity
 ```bash
