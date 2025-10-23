@@ -11,5 +11,3 @@ class ProfileSerializer(serializers.ModelSerializer):
         if '@' not in value:
             raise serializers.ValidationError("Email must contain @")
         return value.lower() """
-
-

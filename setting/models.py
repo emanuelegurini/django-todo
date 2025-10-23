@@ -18,10 +18,14 @@ class Setting(models.Model):
         max_length=20, choices=AccountType.choices, default=AccountType.FREE
     )
 
-    auth_user = models.OneToOneField(AuthUser, on_delete=models.SET_NULL, blank=True, null=True)
+    auth_user = models.OneToOneField(
+        AuthUser, on_delete=models.SET_NULL, blank=True, null=True
+    )
 
     class Meta:
         db_table = "settings"
 
     def __str__(self):
-        return f"Settings for {self.auth_user.first_name if self.auth_user else 'No User'}"
+        return (
+            f"Settings for {self.auth_user.first_name if self.auth_user else 'No User'}"
+        )
