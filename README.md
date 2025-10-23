@@ -26,6 +26,21 @@ python manage.py runserver
 
 ```
 
+- genera secret key per auth
+```bash
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+# Output: kJ8Hn3L9pQ2mR5tW7xZ1aB4cD6eF8gH0
+```
+
+- Crea un superuser (impostazione guidata):
+
+```bash
+python manage.py createsuperuser
+# Username: admin
+# Email: admin@example.com
+# Password: ****
+```
+
 ## SQLite
 
 - Inspect db throught Django
