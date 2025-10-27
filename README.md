@@ -70,3 +70,14 @@ ruff check .
 ```
 
 
+```bash
+curl -X GET http://127.0.0.1:8000/tasks/ \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <access_token>"
+```
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/token/ \
+-H "Content-Type: application/json" \
+-d '{"username": "USER_NAME", "password": "PASSWORD"}'
+```
